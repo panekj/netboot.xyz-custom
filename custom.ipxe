@@ -5,8 +5,6 @@
 
 isset ${dhcp-server} && set ipparam ip=dhcp || set ipparam ip=${ip}::${gateway}:${netmask}::eth0:none:${dns}
 
-goto ${menu}
-
 :start
 clear alpine_version
 set os Alpine Linux
@@ -27,7 +25,7 @@ item v3.14 ${space} ${os} v3.14
 item v3.15 ${space} ${os} v3.15
 item latest-stable ${space} ${os} Latest (stable)
 item edge ${space} ${os} Edge (development)
-choose alpine_version || goto alpine_exit
+choose alpine_version || goto custom_exit
 goto boot
 
 :boot
@@ -42,6 +40,6 @@ echo MD5sums:
 md5sum vmlinuz-lts initramfs-lts
 boot
 
-:alpine_exit
+:custom_exit
 clear menu
 exit 0
